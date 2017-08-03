@@ -42,7 +42,7 @@ func _ready():
 	sanitize_ids_label.set_text(tr("Sanitize IDs"))
 	
 	config = ConfigFile.new()
-	config.load("res://addons/DataEditor/plugin.cfg") 
+	config.load("res://addons/godot_data_editor/plugin.cfg") 
 	serializer = config.get_value("custom", "serializer")
 	extension = config.get_value("custom", "extension")
 
@@ -133,7 +133,7 @@ func _on_Options_confirmed():
 		config.set_value("custom", "class_directory", output_directory)		
 		config.set_value("custom", "output_directory", output_directory)		
 		config.set_value("custom", "sanitize_ids", sanitize_ids)	
-		config.save("res://addons/DataEditor/plugin.cfg")
+		config.save("res://addons/godot_data_editor/plugin.cfg")
 		hide()
 	else:
 		warn_dialog.set_text(error_message)

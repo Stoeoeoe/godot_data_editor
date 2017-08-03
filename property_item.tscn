@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=1]
 
-[ext_resource path="res://addons/DataEditor/property_item.gd" type="Script" id=1]
-[ext_resource path="res://addons/DataEditor/icons/icon_remove.png" type="Texture" id=2]
+[ext_resource path="res://addons/godot_data_editor/property_item.gd" type="Script" id=1]
+[ext_resource path="res://addons/godot_data_editor/icons/icon_remove.png" type="Texture" id=2]
 
 [node name="Panel" type="Panel"]
 

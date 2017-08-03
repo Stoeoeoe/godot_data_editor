@@ -95,7 +95,7 @@ func _ready():
 	
 	if has_delete_button:
 		var delete_button = ToolButton.new()
-		delete_button.set_button_icon(preload("res://addons/DataEditor/icons/icon_remove.png"))
+		delete_button.set_button_icon(preload("res://addons/godot_data_editor/icons/icon_remove.png"))
 		delete_button.set_h_size_flags(Control.SIZE_EXPAND)
 		delete_button.set_margin(MARGIN_LEFT, get_parent().get_parent().get_parent().get_size().x - 34 )
 		delete_button.set_custom_minimum_size(Vector2(28, 24))

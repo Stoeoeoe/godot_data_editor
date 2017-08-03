@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=1]
 
-[ext_resource path="res://addons/DataEditor/options.gd" type="Script" id=1]
-[ext_resource path="res://addons/DataEditor/style/light_gray_panel.tres" type="StyleBox" id=2]
-[ext_resource path="res://addons/DataEditor/icons/icon_load.png" type="Texture" id=3]
+[ext_resource path="res://addons/godot_data_editor/options.gd" type="Script" id=1]
+[ext_resource path="res://addons/godot_data_editor/style/light_gray_panel.tres" type="StyleBox" id=2]
+[ext_resource path="res://addons/godot_data_editor/icons/icon_load.png" type="Texture" id=3]
 
 [node name="Options" type="AcceptDialog"]
 

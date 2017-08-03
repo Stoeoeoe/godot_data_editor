@@ -18,10 +18,10 @@ This repository hosts a plugin for the [Godot Engine]. It allows users to enter 
 # Installation
 * Open your project folder, e.g. "../MyGame/"
 * Create a folder named "addons" (if not already present)
-* In addons, create a folder named "DataEditor" 
+* In addons, create a folder named "godot_data_editor" 
 * Copy the content of this repository into it. You may remove the "sceenshots"  ;)
 * Open your project in the editor and navigate to the plugin (Scene -> Project Settings -> Plugins)
-* The plugin "DataEditor" should now appear, change the status from "Inactive" to "Active"
+* The plugin "godot_data_editor" should now appear, change the status from "Inactive" to "Active"
 * Restart the editor to make sure that the _data_ singleton is loaded properly
 
 I intend to upload the plugin to the AssetLib, once I feel it is stable enough.

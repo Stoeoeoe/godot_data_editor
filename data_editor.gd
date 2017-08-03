@@ -49,7 +49,7 @@ func check_for_data_singleton():
 	
 	if status == OK:
 		if not config.has_section_key("autoload", "data"):
-			config.set_value("autoload", "data", "*res://addons/DataEditor/data.gd")
+			config.set_value("autoload", "data", "*res://addons/godot_data_editor/data.gd")
 			config.save("res://engine.cfg")
 		#var directory = Directory.new()
 		#directory.copy("res://engine.cfg", "res://engine.cfg_BACKUP")
@@ -58,7 +58,7 @@ func check_for_data_singleton():
 # TODO: Obtain defaults from dialog
 func check_plugin_settings():
 	var config = ConfigFile.new()
-	var status = config.load("res://addons/DataEditor/plugin.cfg")
+	var status = config.load("res://addons/godot_data_editor/plugin.cfg")
 	if status == OK:
 		if not config.has_section_key("custom", "class_directory"):
 			config.set_value("custom", "class_directory", "res://classes")
@@ -74,7 +74,7 @@ func check_plugin_settings():
 			config.set_value("custom", "sanitize_ids", true)
 		if not config.has_section_key("custom", "serializer"):
 			config.set_value("custom", "serializer", "json")
-	config.save("res://addons/DataEditor/plugin.cfg")
+	config.save("res://addons/godot_data_editor/plugin.cfg")
 			
 
 # Virtual: Name of the tool button on top

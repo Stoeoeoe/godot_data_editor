@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=1]
 
-[ext_resource path="res://addons/DataEditor/input_dialog.gd" type="Script" id=1]
+[ext_resource path="res://addons/godot_data_editor/input_dialog.gd" type="Script" id=1]
 
 [node name="ConfirmationDialog" type="ConfirmationDialog"]
 

@@ -69,7 +69,7 @@ func initialize_variables():
 
 func load_config():
 	var config = ConfigFile.new()
-	config.load("res://addons/DataEditor/plugin.cfg")
+	config.load("res://addons/godot_data_editor/plugin.cfg")
 	self.config_class_directory = config.get_value("custom", "class_directory")
 	self.config_output_directory = config.get_value("custom", "output_directory")
 	self.config_sanitize_ids = config.get_value("custom", "sanitize_ids")
@@ -448,7 +448,7 @@ func create_class(name, icon_path):
 	# Handle icons
 	var icon_file = File.new()
 	if icon_path == "" or not icon_file.file_exists(icon_path):
-		icon_path = "res://addons/DataEditor/icons/icon_empty.png"
+		icon_path = "res://addons/godot_data_editor/icons/icon_empty.png"
 	
 	var icon_resource = load(icon_path)
 	var icon_data = icon_resource.get_data()
@@ -464,7 +464,7 @@ func create_class(name, icon_path):
 		
 	# Create class
 	var class_source = ""
-	class_source += "extends \"res://addons/DataEditor/data_item.gd\"\n\n"
+	class_source += "extends \"res://addons/godot_data_editor/data_item.gd\"\n\n"
 	class_source += "export(String) var your_string_property = \"\"\n"
 	class_source += "export(bool) var your_boolean_property = true\n"
 	class_source += "export(Color) var your_color_property = Color(1,0,1)\n"

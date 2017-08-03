@@ -41,7 +41,7 @@ func _ready():
 	
 func load_tree(is_reload = false):
 	plugin_config = ConfigFile.new()
-	plugin_config.load("res://addons/DataEditor/plugin.cfg")
+	plugin_config.load("res://addons/godot_data_editor/plugin.cfg")
 
 	
 	self.item_manager = Globals.get("item_manager")

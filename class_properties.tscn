@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=1]
 
-[ext_resource path="res://addons/DataEditor/style/light_gray_panel.tres" type="StyleBox" id=1]
-[ext_resource path="res://addons/DataEditor/class_properties.gd" type="Script" id=2]
-[ext_resource path="res://addons/DataEditor/fonts/droid_serif_bold.tres" type="DynamicFont" id=3]
+[ext_resource path="res://addons/godot_data_editor/style/light_gray_panel.tres" type="StyleBox" id=1]
+[ext_resource path="res://addons/godot_data_editor/class_properties.gd" type="Script" id=2]
+[ext_resource path="res://addons/godot_data_editor/fonts/droid_serif_bold.tres" type="DynamicFont" id=3]
 
 [node name="ClassProperties" type="Panel"]
 
