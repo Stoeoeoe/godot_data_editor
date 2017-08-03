@@ -43,19 +43,6 @@ onready var new_item_class_icon = get_node("NewClassDialog/ClassIconPath")
 onready var new_item_class_icon_dialog = get_node("NewClassDialog/ClassIconFileDialog")
 
 
-#onready var delete_item_dialog = get_node("DeleteItemDialog")
-
-#onready var rename_item_dialog = get_node("RenameItemDialog")
-#onready var rename_item_id = get_node("RenameItemDialog/Id")
-
-#onready var duplicate_item_dialog = get_node("DuplicateItemDialog")
-#onready var duplicate_item_id = get_node("DuplicateItemDialog/Id")
-
-#onready var delete_class_dialog = get_node("DeleteClassDialog")
-
-#onready var display_name_dialog = get_node("DisplayNameDialog")
-#onready var display_name_dialog_name = get_node("DisplayNameDialog/Name")
-
 onready var warn_dialog = get_node("WarnDialog")
 onready var options_screen = get_node("OptionsDialog")
 
@@ -68,21 +55,9 @@ signal input_dialog_confirmed(text1, text2)
 
 # First initialize the item manager which is used for loading, saving and configs
 func _init():
-	item_manager = preload("item_manager.gd").new()
-	#item_manager.set_name("ItemManager")
-	#Globals.set("item_manager", item_manager)
-#	self.add_child(item_manager)
-#	item_manager.raise()
+	item_manager = preload("item_manager.gd").new()			# This item_manager will add itself to the globals
 
-
-
-
-func _ready():
-	#add_button.set_shortcut(create_shortcut(KEY_MASK_CMD|KEY_N))
-	#delete_button.set_shortcut(create_shortcut(KEY_DELETE))
-	#save_button.set_shortcut(create_shortcut(KEY_MASK_SHIFT|KEY_MASK_CMD|KEY_S))
-	#save_all_button.set_shortcut(create_shortcut(KEY_MASK_SHIFT|KEY_MASK_CMD|KEY_MASK_ALT|KEY_S))
-	
+func _ready():	
 	Globals.set("debug_is_editor", false)	
 	# Tree signals
 	item_tree.connect("on_new_item_pressed", self, "handle_actions", ["add"])
@@ -136,11 +111,20 @@ func _ready():
 		# Select the first item in the tree when loading the GUI
 		change_item_context(selected_item, selected_class)
 
-# TODO: Other OS...
+# TODO: Implement
 func open_item():
 	var item_path = item_manager.get_full_path(selected_item)
-	print(item_path)
-	OS.execute("explorer", [item_path], false)
+	var program = ""
+	var os_name = OS.get_name()
+	if os_name == "Windows":
+		program = "explorer"
+		item_path = item_path.replace("/", "\\")		# ~_~... 
+	# TODO: Not sure if these work... Probably add the possibility to add a custom editor
+	elif os_name == "OSX":
+		program = "open"								
+	else:
+		program = "nautilus"
+	OS.execute(program, [item_path], false)
 
 func change_item_context(selected_item, selected_class):	
 	
@@ -170,13 +154,11 @@ func change_item_context(selected_item, selected_class):
 		
 	# An item was selected
 	if selected_item:
-		
-		# Context was lost, e.g. because of changes to the classes. Get a new copy from the item_manager
+		# Context was lost, e.g. because of changes to the classes. Reload.
 		if selected_item and not selected_item.get("_id"):
 			self.item_manager.load_manager()
 			self.item_tree.load_tree(true)
 			selected_item = item_tree.select_first_element()
-
 		
 		change_display_name_button.set_disabled(false)		
 		duplicate_button.set_disabled(false)		
@@ -214,7 +196,7 @@ func change_item_context(selected_item, selected_class):
 
 		self.selected_item = null
 		self.selected_id  = null
-		id_label.set_text(selected_class.capitalize() + " " + (selected_class))
+		id_label.set_text(selected_class.capitalize())
 		class_overview.show()
 		instance_details.hide()
 		no_classes.hide()
@@ -232,9 +214,11 @@ func create_shortcut(keys):
 	input_event.ID = keys
 	short_cut.set_shortcut(input_event)
 
+# TODO: Implement
 func warn_about_reload():
 	if item_manager.has_unsaved_items():
 		input_dialog.popup(self, "reload_confirmed", tr("Confirm reload"), tr("Some changes have not been saved. \nThey will be discarded if you proceed. Are you sure you want to perform this action?"))	
+
 
 func reload():
 	item_manager.load_manager()
@@ -243,20 +227,10 @@ func reload():
 		item_tree.select_item(item_manager.get_item(selected_class, selected_id))
 		
 
-	#var last_selected_class = selected_class
-	#var last_selected_id = selected_id
-	#selected_item = item_manager.get_item(last_selected_class, last_selected_id)
-	#if selected_item:
-		#selected_id = selected_item._id
-		#change_item_context(selected_item, selected_class)
-	
-
 func toggle_item_dirty_state(item):
 	item._dirty = true
 	item_tree.set_tree_item_label_text(item)
 
-#func show_delete_custom_property_dialog(property_name):
-#	input_dialog.popup(self, "delete_custom_property", tr("Delete Custom Property"), tr("Are you sure you want to delete this property?"))
 
 # Validation takes place in the item manager
 func _on_NewCustomPropertyDialog_confirmed():
@@ -269,10 +243,8 @@ func _on_NewCustomPropertyDialog_confirmed():
 		custom_properties.build_properties(selected_item)
 
 
-
 # TODO: Show confirmation dialog
 func delete_custom_property(property_name):
-	#input_dialog.popup(self, "_on_delete__confirmed", tr("New Item"), tr("Please enter an ID and optionally a display name the new item"), tr("ID"), "", tr("Display Name (optional)"), "")	
 	item_manager.delete_custom_property(selected_item, property_name)
 	toggle_item_dirty_state(selected_item)
 	custom_properties.build_properties(selected_item)
@@ -301,10 +273,11 @@ func _on_NewClassDialog_confirmed():
 func _on_NewClassIconSearchButton_button_down():
 	new_item_class_icon_dialog.popup_centered()
 
+# Icon for new class was selected
 func _on_NewClassIconFileDialog_file_selected(path):
 	new_item_class_icon.set_text(path)
 
-
+# General handler for a lot of actions to centralize the GUI logic a bit
 func handle_actions(action, argument = ""):
 	if action == "add":
 		input_dialog.popup(self, "_on_add_item_confirmed", tr("New Item"), tr("Please enter an ID for and optionally a display name the new item"), tr("ID"), "", tr("Display Name (optional)"), "")

@@ -44,6 +44,7 @@ var type_names = {"STRING":TYPE_STRING, "BOOL":TYPE_BOOL, "COLOR":TYPE_COLOR, "O
 func _init():
 	load_manager()
 	
+	
 func load_manager():
 	initialize_variables()
 	load_config()
@@ -111,7 +112,8 @@ func get_item_path(item):
 	return config_output_directory + "/" + item._class + "/" + item._id + "." + config_extension
 
 func get_full_path(item):
-	return  config_output_directory.replace("res://", "") + "/" + item._class + "/" + item._id + "." + config_extension
+	return Globals.globalize_path(config_output_directory + "/" + item._class + "/" + item._id + "." + config_extension)
+#	return  config_output_directory.replace("res://", "") + "/" + item._class + "/" + item._id + "." + config_extension
 
 func load_items():
 	items.clear()
@@ -373,23 +375,18 @@ func duplicate_item(item, id, display_name):
 	items[new_item._class][new_item._id] = new_item
 	return new_item
 	
-# Rename the item, delete the old entrym overwrite the id and save anew
-# TODO: Consider rename, could it still be referenced/locked somewhere?
+# Rename the item, delete the old entry, overwrite the id and save anew
+# TODO: Could it still be referenced/locked somewhere?
+# TODO: Check for duplicate ids?
 func rename_item(item, new_id):
 	new_id = sanitize_string(new_id)
-	if is_id_available(new_id):
-		var directory = Directory.new()
-		directory.remove(get_item_path(item))
-		if item._id == item._display_name:
-			item._display_name = new_id
-		save_item(item)
-		load_manager()
-	else:
-		pass	# TODO: Issue warning
-	
-
-func is_id_available(id):
-	return true
+	var directory = Directory.new()
+	directory.remove(get_item_path(item))
+	if item._id == item._display_name:
+		item._display_name = new_id
+	item._id = new_id
+	save_item(item)
+	load_manager()
 
 # Adds a custom property to an item. 
 # Returns true if it succeeded, false if it failed
@@ -502,12 +499,9 @@ func rename_id_if_exists(item_class, id):
 		var number = 0
 		var current_name = id
 		while(true):
-			
 			regex.find(current_name)
 			var id_without_number = regex.get_capture(1)
 			var number_at_end_string = regex.get_capture(2)
-#			var id_without_number = regex.search(current_name).get_string(1)
-#			var number_at_end_string = regex.search(current_name).get_string(2)
 			var number_at_end = int(number_at_end_string)
 			number = number + number_at_end + 1
 			var new_id = id_without_number + str(number)
@@ -542,13 +536,11 @@ func rename_extension_of_all_items(new_extension, serializer):
 				directory.rename(original_item_path, new_item_path)
 				directory.remove(original_item_path)
 				load_config()
-#				load_manager()
 				save_all_items()
 			else:
 				directory.remove(original_item_path)
 				load_config()
 				save_all_items()
-#				load_manager()
 	pass
 	
 
@@ -575,6 +567,4 @@ func has_unsaved_items():
 	return false
 
 # TODO: Lazy loading
-# TODO: Proper path handling
 # TODO: Arrays
-# TODO: Proper renaming
