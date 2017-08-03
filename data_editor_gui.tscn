@@ -1,0 +1,840 @@
+[gd_scene load_steps=22 format=1]
+
+[ext_resource path="res://addons/DataEditor/data_editor_gui.gd" type="Script" id=1]
+[ext_resource path="res://addons/DataEditor/icons/icon_add.png" type="Texture" id=2]
+[ext_resource path="res://addons/DataEditor/icons/icon_save.png" type="Texture" id=3]
+[ext_resource path="res://addons/DataEditor/icons/icon_rename.png" type="Texture" id=4]
+[ext_resource path="res://addons/DataEditor/icons/icon_duplicate.png" type="Texture" id=5]
+[ext_resource path="res://addons/DataEditor/icons/icon_remove.png" type="Texture" id=6]
+[ext_resource path="res://addons/DataEditor/icons/icon_reload_small.png" type="Texture" id=7]
+[ext_resource path="res://addons/DataEditor/icons/icon_script.png" type="Texture" id=8]
+[ext_resource path="res://addons/DataEditor/icons/icon_options.png" type="Texture" id=9]
+[ext_resource path="res://addons/DataEditor/item_tree.tscn" type="PackedScene" id=10]
+[ext_resource path="res://addons/DataEditor/icons/icon_display-name.png" type="Texture" id=11]
+[ext_resource path="res://addons/DataEditor/icons/icon_copy.png" type="Texture" id=12]
+[ext_resource path="res://addons/DataEditor/icons/icon_edit.png" type="Texture" id=13]
+[ext_resource path="res://addons/DataEditor/fonts/droid_sans_title.tres" type="DynamicFont" id=14]
+[ext_resource path="res://addons/DataEditor/class_properties.tscn" type="PackedScene" id=15]
+[ext_resource path="res://addons/DataEditor/custom_properties.tscn" type="PackedScene" id=16]
+[ext_resource path="res://addons/DataEditor/class_overview.tscn" type="PackedScene" id=17]
+[ext_resource path="res://addons/DataEditor/no_classes.tscn" type="PackedScene" id=18]
+[ext_resource path="res://addons/DataEditor/warn.gd" type="Script" id=19]
+[ext_resource path="res://addons/DataEditor/options.tscn" type="PackedScene" id=20]
+[ext_resource path="res://addons/DataEditor/input_dialog.tscn" type="PackedScene" id=21]
+
+[node name="DataEditor" type="Control"]
+
+anchor/right = 1
+anchor/bottom = 1
+rect/min_size = Vector2( 800, 0 )
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 3
+size_flags/vertical = 3
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 0.0
+margin/bottom = 0.0
+script/script = ExtResource( 1 )
+
+[node name="VBox" type="VBoxContainer" parent="."]
+
+anchor/right = 1
+anchor/bottom = 1
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 3
+size_flags/vertical = 3
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 0.0
+margin/bottom = 0.0
+alignment = 0
+
+[node name="Head" type="HBoxContainer" parent="VBox"]
+
+rect/min_size = Vector2( 0, 22 )
+focus/ignore_mouse = false
+focus/stop_mouse = false
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 1280.0
+margin/bottom = 28.0
+alignment = 0
+
+[node name="Add" type="ToolButton" parent="VBox/Head"]
+
+rect/min_size = Vector2( 28, 28 )
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 56.0
+margin/bottom = 28.0
+disabled = true
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+text = "Add"
+icon = ExtResource( 2 )
+flat = true
+align = 0
+
+[node name="VSeparator5" type="VSeparator" parent="VBox/Head"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 60.0
+margin/top = 0.0
+margin/right = 63.0
+margin/bottom = 28.0
+
+[node name="Save" type="ToolButton" parent="VBox/Head"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 67.0
+margin/top = 0.0
+margin/right = 127.0
+margin/bottom = 28.0
+disabled = true
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+text = "Save"
+icon = ExtResource( 3 )
+flat = false
+
+[node name="SaveAll" type="ToolButton" parent="VBox/Head"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 131.0
+margin/top = 0.0
+margin/right = 212.0
+margin/bottom = 28.0
+disabled = true
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+text = "Save All"
+icon = ExtResource( 3 )
+flat = false
+
+[node name="VSeparator" type="VSeparator" parent="VBox/Head"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 216.0
+margin/top = 0.0
+margin/right = 219.0
+margin/bottom = 28.0
+
+[node name="Rename" type="ToolButton" parent="VBox/Head"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 223.0
+margin/top = 0.0
+margin/right = 306.0
+margin/bottom = 28.0
+disabled = true
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+text = "Rename"
+icon = ExtResource( 4 )
+flat = false
+
+[node name="Duplicate" type="ToolButton" parent="VBox/Head"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 310.0
+margin/top = 0.0
+margin/right = 402.0
+margin/bottom = 28.0
+disabled = true
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+text = "Duplicate"
+icon = ExtResource( 5 )
+flat = false
+
+[node name="Delete" type="ToolButton" parent="VBox/Head"]
+
+rect/min_size = Vector2( 28, 28 )
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 406.0
+margin/top = 0.0
+margin/right = 480.0
+margin/bottom = 28.0
+disabled = true
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+text = "Delete"
+icon = ExtResource( 6 )
+flat = true
+
+[node name="VSeparator3" type="VSeparator" parent="VBox/Head"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 484.0
+margin/top = 0.0
+margin/right = 487.0
+margin/bottom = 28.0
+
+[node name="Refresh2" type="ToolButton" parent="VBox/Head"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 491.0
+margin/top = 0.0
+margin/right = 563.0
+margin/bottom = 28.0
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+text = "Reload"
+icon = ExtResource( 7 )
+flat = false
+
+[node name="VSeparator2" type="VSeparator" parent="VBox/Head"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 567.0
+margin/top = 0.0
+margin/right = 570.0
+margin/bottom = 28.0
+
+[node name="NewClass" type="ToolButton" parent="VBox/Head"]
+
+rect/min_size = Vector2( 28, 28 )
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 574.0
+margin/top = 0.0
+margin/right = 670.0
+margin/bottom = 28.0
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+text = "New Class"
+icon = ExtResource( 8 )
+flat = true
+align = 0
+
+[node name="VSeparator4" type="VSeparator" parent="VBox/Head"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 674.0
+margin/top = 0.0
+margin/right = 677.0
+margin/bottom = 28.0
+
+[node name="Options" type="ToolButton" parent="VBox/Head"]
+
+rect/min_size = Vector2( 28, 28 )
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 681.0
+margin/top = 0.0
+margin/right = 763.0
+margin/bottom = 28.0
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+text = "Options"
+icon = ExtResource( 9 )
+flat = true
+align = 0
+
+[node name="Search" type="LineEdit" parent="VBox/Head"]
+
+visibility/visible = false
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 377.0
+margin/top = 0.0
+margin/right = 435.0
+margin/bottom = 28.0
+placeholder/text = "Search"
+placeholder/alpha = 0.6
+focus_mode = 2
+caret/caret_blink = false
+caret/caret_blink_speed = 0.65
+
+[node name="HSeparator" type="HSeparator" parent="VBox"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 32.0
+margin/right = 1280.0
+margin/bottom = 35.0
+
+[node name="Body" type="HSplitContainer" parent="VBox"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = false
+size_flags/horizontal = 3
+size_flags/vertical = 3
+margin/left = 0.0
+margin/top = 39.0
+margin/right = 1280.0
+margin/bottom = 600.0
+split/offset = 0
+split/collapsed = false
+split/dragger_visibility = 0
+
+[node name="ItemTree" parent="VBox/Body" instance=ExtResource( 10 )]
+
+anchor/right = 0
+anchor/bottom = 0
+rect/min_size = Vector2( 165, 0 )
+size_flags/horizontal = 2
+size_flags/stretch_ratio = 0.0
+margin/right = 165.0
+margin/bottom = 561.0
+
+[node name="Content" type="Panel" parent="VBox/Body"]
+
+visibility/self_opacity = 0.0
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 3
+size_flags/vertical = 3
+margin/left = 177.0
+margin/top = 0.0
+margin/right = 1280.0
+margin/bottom = 561.0
+
+[node name="VBox" type="VBoxContainer" parent="VBox/Body/Content"]
+
+anchor/right = 1
+anchor/bottom = 1
+focus/ignore_mouse = false
+focus/stop_mouse = false
+size_flags/horizontal = 3
+size_flags/vertical = 3
+size_flags/stretch_ratio = 0.0
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 0.0
+margin/bottom = 0.0
+alignment = 0
+
+[node name="Container" type="MarginContainer" parent="VBox/Body/Content/VBox"]
+
+rect/min_size = Vector2( 0, 25 )
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 1103.0
+margin/bottom = 25.0
+
+[node name="HBox" type="HBoxContainer" parent="VBox/Body/Content/VBox/Container"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = false
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 8.0
+margin/top = 0.0
+margin/right = 1103.0
+margin/bottom = 25.0
+custom_constants/separation = 15
+alignment = 2
+
+[node name="DisplayName" type="ToolButton" parent="VBox/Body/Content/VBox/Container/HBox"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 0
+size_flags/vertical = 2
+margin/left = 722.0
+margin/top = 0.0
+margin/right = 892.0
+margin/bottom = 25.0
+disabled = true
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+text = "Change Display Name"
+icon = ExtResource( 11 )
+flat = true
+align = 0
+
+[node name="CopyId" type="ToolButton" parent="VBox/Body/Content/VBox/Container/HBox"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 0
+size_flags/vertical = 2
+margin/left = 907.0
+margin/top = 0.0
+margin/right = 988.0
+margin/bottom = 25.0
+disabled = true
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+text = "Copy ID"
+icon = ExtResource( 12 )
+flat = true
+align = 0
+
+[node name="EditClass" type="ToolButton" parent="VBox/Body/Content/VBox/Container/HBox"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 0
+size_flags/vertical = 2
+margin/left = 1003.0
+margin/top = 0.0
+margin/right = 1095.0
+margin/bottom = 25.0
+disabled = true
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+text = "Edit Class"
+icon = ExtResource( 13 )
+flat = true
+align = 0
+
+[node name="ItemIdLabel" type="Label" parent="VBox/Body/Content/VBox/Container"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 8.0
+margin/top = 0.0
+margin/right = 1103.0
+margin/bottom = 25.0
+custom_fonts/font = ExtResource( 14 )
+custom_colors/font_color_shadow = Color( 0.300781, 0.300781, 0.300781, 1 )
+custom_constants/shadow_offset_x = 1
+custom_constants/shadow_offset_y = 1
+text = "No Classes"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="GridContainer" type="GridContainer" parent="VBox/Body/Content/VBox/Container"]
+
+visibility/visible = false
+focus/ignore_mouse = false
+focus/stop_mouse = false
+size_flags/horizontal = 0
+size_flags/vertical = 2
+margin/left = 555.0
+margin/top = 0.0
+margin/right = 555.0
+margin/bottom = 25.0
+custom_constants/hseparation = 10
+columns = 2
+
+[node name="Created" type="Label" parent="VBox/Body/Content/VBox/Container/GridContainer"]
+
+visibility/opacity = 0.25
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 91.0
+margin/bottom = 14.0
+text = "Created:"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="CreatedDate" type="Label" parent="VBox/Body/Content/VBox/Container/GridContainer"]
+
+visibility/opacity = 0.25
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 101.0
+margin/top = 0.0
+margin/right = 217.0
+margin/bottom = 14.0
+text = "01.01.01 01:01:01"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="LastModifiedLabel" type="Label" parent="VBox/Body/Content/VBox/Container/GridContainer"]
+
+visibility/opacity = 0.25
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 0.0
+margin/top = 18.0
+margin/right = 91.0
+margin/bottom = 32.0
+text = "Last modified:"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="LastModifiedDate" type="Label" parent="VBox/Body/Content/VBox/Container/GridContainer"]
+
+visibility/opacity = 0.25
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 101.0
+margin/top = 18.0
+margin/right = 217.0
+margin/bottom = 32.0
+text = "01.01.01 01:01:01"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBox/Body/Content/VBox/Container"]
+
+visibility/visible = false
+focus/ignore_mouse = false
+focus/stop_mouse = false
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 8.0
+margin/top = 0.0
+margin/right = 1103.0
+margin/bottom = 25.0
+alignment = 0
+
+[node name="HSeparator" type="HSeparator" parent="VBox/Body/Content/VBox"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 3
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 29.0
+margin/right = 1103.0
+margin/bottom = 32.0
+
+[node name="Spacer" type="Control" parent="VBox/Body/Content/VBox"]
+
+rect/min_size = Vector2( 0, 10 )
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 3
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 36.0
+margin/right = 1103.0
+margin/bottom = 46.0
+
+[node name="InstanceDetails" type="PanelContainer" parent="VBox/Body/Content/VBox"]
+
+editor/display_folded = true
+visibility/visible = false
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 3
+size_flags/vertical = 3
+margin/left = 0.0
+margin/top = 50.0
+margin/right = 1103.0
+margin/bottom = 303.0
+
+[node name="HBox" type="HBoxContainer" parent="VBox/Body/Content/VBox/InstanceDetails"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = false
+size_flags/horizontal = 3
+size_flags/vertical = 3
+margin/left = 7.0
+margin/top = 7.0
+margin/right = 1096.0
+margin/bottom = 246.0
+alignment = 0
+
+[node name="ClassProperties" parent="VBox/Body/Content/VBox/InstanceDetails/HBox" instance=ExtResource( 15 )]
+
+anchor/right = 0
+anchor/bottom = 0
+margin/right = 542.0
+margin/bottom = 239.0
+
+[node name="CustomProperties" parent="VBox/Body/Content/VBox/InstanceDetails/HBox" instance=ExtResource( 16 )]
+
+anchor/right = 0
+anchor/bottom = 0
+size_flags/horizontal = 3
+size_flags/vertical = 3
+margin/left = 546.0
+margin/right = 1089.0
+margin/bottom = 239.0
+
+[node name="ClassOverview" parent="VBox/Body/Content/VBox" instance=ExtResource( 17 )]
+
+visibility/visible = false
+anchor/right = 0
+anchor/bottom = 0
+margin/top = 50.0
+margin/right = 1103.0
+margin/bottom = 561.0
+
+[node name="NoClasses" parent="VBox/Body/Content/VBox" instance=ExtResource( 18 )]
+
+anchor/right = 0
+anchor/bottom = 0
+margin/left = 0.0
+margin/top = 50.0
+margin/right = 1103.0
+margin/bottom = 561.0
+
+[node name="WarnDialog" type="AcceptDialog" parent="."]
+
+visibility/visible = false
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 350.0
+margin/bottom = 110.0
+popup/exclusive = true
+window/title = ""
+dialog/hide_on_ok = true
+script/script = ExtResource( 19 )
+
+[node name="NewClassDialog" type="ConfirmationDialog" parent="."]
+
+visibility/visible = false
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 519.0
+margin/top = 193.0
+margin/right = 990.0
+margin/bottom = 316.0
+popup/exclusive = true
+window/title = "New Class"
+dialog/text = "Enter the name and the path to an optional icon"
+dialog/hide_on_ok = true
+
+[node name="ClassName" type="LineEdit" parent="NewClassDialog"]
+
+focus_neighbour/bottom = NodePath("../ClassIconPath")
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 8.0
+margin/top = 27.0
+margin/right = 466.0
+margin/bottom = 51.0
+placeholder/text = "Name"
+placeholder/alpha = 0.6
+focus_mode = 2
+caret/caret_blink = false
+caret/caret_blink_speed = 0.65
+
+[node name="ClassIconPath" type="LineEdit" parent="NewClassDialog"]
+
+focus_neighbour/top = NodePath("../ClassName")
+focus_neighbour/right = NodePath("../NewClassIconSearchButton")
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 8.0
+margin/top = 60.0
+margin/right = 393.0
+margin/bottom = 84.0
+placeholder/text = "Icon Path (optional)"
+placeholder/alpha = 0.6
+focus_mode = 2
+caret/caret_blink = false
+caret/caret_blink_speed = 0.65
+
+[node name="ClassIconFileDialog" type="FileDialog" parent="NewClassDialog"]
+
+visibility/visible = false
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 393.0
+margin/bottom = 404.0
+popup/exclusive = true
+window/title = "Open a File"
+dialog/hide_on_ok = true
+mode = 0
+access = 2
+filters = StringArray( "*.png" )
+show_hidden_files = false
+
+[node name="NewClassIconSearchButton" type="Button" parent="NewClassDialog"]
+
+focus_neighbour/left = NodePath("../ClassIconPath")
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 399.0
+margin/top = 61.0
+margin/right = 466.0
+margin/bottom = 83.0
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+text = "Search"
+flat = false
+
+[node name="OptionsDialog" parent="." instance=ExtResource( 20 )]
+
+visibility/visible = false
+margin/right = 550.0
+margin/bottom = 310.0
+
+[node name="InputDialog" parent="." instance=ExtResource( 21 )]
+
+visibility/visible = false
+
+[node name="NewCustomPropertyDialog" type="ConfirmationDialog" parent="."]
+
+visibility/visible = false
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 117.0
+margin/top = 117.0
+margin/right = 489.0
+margin/bottom = 243.0
+popup/exclusive = false
+window/title = "New custom property"
+dialog/text = "Enter the name and type of the property"
+dialog/hide_on_ok = true
+
+[node name="LineEdit" type="LineEdit" parent="NewCustomPropertyDialog"]
+
+focus_neighbour/bottom = NodePath("../TypeOptions")
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 3
+size_flags/vertical = 2
+margin/left = 7.0
+margin/top = 29.0
+margin/right = 363.0
+margin/bottom = 53.0
+placeholder/text = "Name"
+placeholder/alpha = 0.6
+focus_mode = 2
+caret/caret_blink = false
+caret/caret_blink_speed = 0.65
+
+[node name="TypeOptions" type="OptionButton" parent="NewCustomPropertyDialog"]
+
+focus_neighbour/top = NodePath("../LineEdit")
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 7.0
+margin/top = 64.0
+margin/right = 363.0
+margin/bottom = 84.0
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+text = "BOOL"
+flat = false
+align = 0
+selected = 0
+items = [ "BOOL", null, false, -1, 1, "COLOR", null, false, -1, 14, "IMAGE", null, false, -1, 15, "INT", null, false, -1, 2, "NODE_PATH", null, false, -1, 16, "OBJECT", null, false, -1, 18, "PLANE", null, false, -1, 9, "QUAT", null, false, -1, 10, "REAL", null, false, -1, 3, "RECT2", null, false, -1, 6, "STRING", null, false, -1, 4, "TRANSFORM", null, false, -1, 13, "VECTOR2", null, false, -1, 5, "VECTOR3", null, false, -1, 7 ]
+
+[connection signal="button_down" from="VBox/Head/Add" to="." method="handle_actions" binds= [ "add" ]]
+
+[connection signal="button_down" from="VBox/Head/Save" to="." method="handle_actions" binds= [ "save" ]]
+
+[connection signal="button_down" from="VBox/Head/SaveAll" to="." method="handle_actions" binds= [ "save_all" ]]
+
+[connection signal="button_down" from="VBox/Head/Rename" to="." method="handle_actions" binds= [ "rename" ]]
+
+[connection signal="button_down" from="VBox/Head/Duplicate" to="." method="handle_actions" binds= [ "duplicate" ]]
+
+[connection signal="button_down" from="VBox/Head/Delete" to="." method="handle_actions" binds= [ "delete" ]]
+
+[connection signal="button_down" from="VBox/Head/Refresh2" to="." method="handle_actions" binds= [ "reload" ]]
+
+[connection signal="button_down" from="VBox/Head/NewClass" to="." method="handle_actions" binds= [ "new_class" ]]
+
+[connection signal="button_down" from="VBox/Head/Options" to="." method="handle_actions" binds= [ "options" ]]
+
+[connection signal="button_down" from="VBox/Body/Content/VBox/Container/HBox/DisplayName" to="." method="handle_actions" binds= [ "change_display_name" ]]
+
+[connection signal="button_down" from="VBox/Body/Content/VBox/Container/HBox/CopyId" to="." method="handle_actions" binds= [ "copy_id" ]]
+
+[connection signal="button_down" from="VBox/Body/Content/VBox/Container/HBox/EditClass" to="." method="handle_actions" binds= [ "edit_class" ]]
+
+[connection signal="confirmed" from="NewClassDialog" to="." method="_on_NewClassDialog_confirmed"]
+
+[connection signal="file_selected" from="NewClassDialog/ClassIconFileDialog" to="." method="_on_NewClassIconFileDialog_file_selected"]
+
+[connection signal="button_down" from="NewClassDialog/NewClassIconSearchButton" to="." method="_on_NewClassIconSearchButton_button_down"]
+
+[connection signal="confirmed" from="NewCustomPropertyDialog" to="." method="_on_NewCustomPropertyDialog_confirmed"]
+
+

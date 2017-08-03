@@ -1,0 +1,21 @@
+Add "Notes" to each element
+Add Display Name for each
+Add Refresh
+Check how to deal with reloading the tree
+Add Sub categories
+Translate
+Add "state" handling
+Add UndoRedo
+
+Move short callbacks from self to the object and call directly  (e.g. popup)
+
+Use EditorFileSystem class to check for changes (external ones)
+
+print_progress
+
+
+Handle when switching from encrypted to non-encrypted and vice versa
+
+# Progress?
+get_status(story_item)
+set_status(story_item, value)
