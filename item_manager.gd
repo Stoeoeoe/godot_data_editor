@@ -46,13 +46,34 @@ func _init():
 	
 	
 func load_manager():
+	store_unsaved_changes()
 	initialize_variables()
 	load_config()
 	load_class_names()
 	load_classes()
 	set_up_item_folders()
 	load_items()
+	reload_unsaved_items()
 	Globals.set("item_manager", self)
+
+# Try to keep unsaved changes when (re)loading the item_manager
+var unsaved_items = []
+func store_unsaved_changes():
+	for item_class in items:
+		for item in items[item_class].values():
+			if item._dirty or not item._persistent:
+				unsaved_items.append(item)
+	
+# Create a duplicate of the unsaved item because this will not mess up changed properties
+func reload_unsaved_items():
+	for unsaved_item in unsaved_items:
+		print(unsaved_item._id)
+		duplicate_item(unsaved_item, unsaved_item._id, unsaved_item._display_name, true)
+#		new_item._dirty = true
+
+	pass
+	unsaved_items = []
+		
 
 func initialize_variables():
 	items = {}
@@ -92,6 +113,8 @@ func load_class_names():
 	class_names.sort()
 
 
+# Loads the classes from disk
+# TODO: Check if there is an issue with the class and display a warning instead of crashing the whole plugin...
 func load_classes():
 	classes = {}
 	for item_class in class_names:
@@ -132,11 +155,12 @@ func load_items():
 					items[item_class][id] = load_binary_item(item_class, file_name)
 				else:
 					pass
+				items[item_class][id].set_name(items[item_class][id]._class + ":" + id)
 			file_name = directory.get_next()
 		pass
 	pass
 	
-#
+# Loads a single item stored in the binary format
 func load_binary_item(item_class, file_name):
 	var file = File.new()
 	var id = file_name.basename()
@@ -155,8 +179,7 @@ func load_binary_item(item_class, file_name):
 			var value = file.get_var()
 			item.set(property_name, value)
 		pass
-		# And now iterate over the rest of the variables and check if they have not yet been initialized
-		
+
 		item._dirty = false
 		item._persistent = true
 	else:
@@ -164,7 +187,7 @@ func load_binary_item(item_class, file_name):
 	file.close()
 	return item
 	
-
+# Loads a single item stored in the json format
 func load_json_item(item_class, file_name):
 	var file = File.new()
 	var id = file_name.basename()
@@ -220,8 +243,15 @@ func parse_value(type, value):
 	return value
 					
 	
+# Saves all items
+func save_all_items():
+	for item_class in items:
+		for id in items[item_class]:
+			save_item(items[item_class][id])
+		pass
+	pass
 
-
+# Stores an item on the disk and updates the "last modified" property
 func save_item(item):
 	if item:
 		item._last_modified= OS.get_unix_time()
@@ -232,7 +262,7 @@ func save_item(item):
 		else:
 			pass
 
-		
+# Saves a single binary item		
 func save_binary_item(item):
 	var file = File.new()
 	var status = 0
@@ -255,6 +285,7 @@ func save_binary_item(item):
 		pass			#TODO: Handle
 	file.close()
 
+# Saves a single json item
 func save_json_item(item):
 	var file = File.new()
 	var status = 0
@@ -290,6 +321,7 @@ func save_json_item(item):
 	file.store_string(dict.to_json())
 	file.close()
 
+
 func sanitize_variant(value, type):
 	if type == TYPE_COLOR:
 		value = value.to_html()
@@ -298,40 +330,33 @@ func sanitize_variant(value, type):
 	return value
 
 
-
-func save_all_items():
-	for item_class in items:
-		for id in items[item_class]:
-			save_item(items[item_class][id])
-		pass
-	pass
-
-
+# Deletes a single item
 func delete_item(item):
 	var path = get_item_path(item)
 	var directory = Directory.new()
 	# TODO: Check why items[item._class].erase(item) doesn't work
 	var items_of_class = items[item._class]			
-	#items_of_class.erase(item.id)
-	#items[item._class] = items_of_class
 	var status = directory.remove(path)
 	load_manager()
-	
-	
 
-func get_item(item_class, id):
-	if items.has(item_class) and items[item_class].has(id):
-		return items[item_class][id]
-	else:
-		return null
-
+		
+# Gets all items of a specific class
 func get_items(item_class):
 	if items.has(item_class):
 		return items[item_class]
 	else:
 		return null
+	
+
+# Gets a single item 
+func get_item(item_class, id):
+	if items.has(item_class) and items[item_class].has(id):
+		return items[item_class][id]
+	else:
+		return null
 		
 
+# Creates a new item of a given class, adds it to the items dictionary and returns the newly created item
 func create_and_add_new_item(item_class, id, display_name):
 	id = sanitize_string(id)
 	id = rename_id_if_exists(item_class, id)
@@ -348,19 +373,19 @@ func create_and_add_new_item(item_class, id, display_name):
 	new_item._created = OS.get_unix_time()
 	return new_item
 
-func duplicate_item(item, id, display_name):
+func duplicate_item(item, id, display_name, overwrite = true):
 	id = sanitize_string(id)
-	id = rename_id_if_exists(item._class, id)
+	if not overwrite:
+		id = rename_id_if_exists(item._class, id)
 	if id == "" or id == null:
 		emit_signal("item_duplication_failed", "Item duplication failed", "The item must haven an ID.")
 		return null
-	if items[item._class].has(id):
-		emit_signal("item_duplication_failed", "Item duplication failed", "The item could not be duplicated.")
+	if items[item._class].has(id) and not overwrite:
+		emit_signal("item_duplication_failed", "Item duplication failed", "The item could not be duplicated because it already exists.")
 		return null
 				
 	var new_item = classes[item._class].new(id)
 	# Copy all properties
-	
 	for property in new_item.get_property_list():
 		if property["usage"] >= PROPERTY_USAGE_SCRIPT_VARIABLE:
 			new_item.set(property["name"], item.get(property["name"]))
@@ -373,6 +398,7 @@ func duplicate_item(item, id, display_name):
 	new_item._dirty = true
 	new_item._persistent = false
 	items[new_item._class][new_item._id] = new_item
+	items[new_item._class][id].set_name(new_item._class + ":" + id)
 	return new_item
 	
 # Rename the item, delete the old entry, overwrite the id and save anew

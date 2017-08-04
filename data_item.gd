@@ -21,8 +21,13 @@ func _ready():
 	pass
 	
 	
+		
 func get_class():
-	return self.get_script().get_path().get_file().basename()
+	if _class:
+		return _class
+	else:
+		_class = self.get_script().get_path().get_file().basename()
+		return _class
 
 
 func get_class_name():
