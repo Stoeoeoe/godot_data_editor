@@ -1,0 +1,116 @@
+[gd_scene load_steps=4 format=1]
+
+[ext_resource path="res://addons/godot_data_editor/style/light_gray_panel.tres" type="StyleBox" id=1]
+[ext_resource path="res://addons/godot_data_editor/class_properties.gd" type="Script" id=2]
+[ext_resource path="res://addons/godot_data_editor/fonts/droid_serif_bold.tres" type="DynamicFont" id=3]
+
+[node name="ClassProperties" type="Panel"]
+
+anchor/right = 1
+anchor/bottom = 1
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 3
+size_flags/vertical = 3
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 0.0
+margin/bottom = 0.0
+custom_styles/panel = ExtResource( 1 )
+script/script = ExtResource( 2 )
+
+[node name="Body" type="VBoxContainer" parent="."]
+
+anchor/right = 1
+anchor/bottom = 1
+focus/ignore_mouse = false
+focus/stop_mouse = false
+size_flags/horizontal = 3
+size_flags/vertical = 3
+margin/left = 10.0
+margin/top = 10.0
+margin/right = 10.0
+margin/bottom = 10.0
+alignment = 0
+
+[node name="TitleLabel" type="Label" parent="Body"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 1260.0
+margin/bottom = 2.0
+custom_fonts/font = ExtResource( 3 )
+text = "Class Properties"
+uppercase = true
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="HSeparator" type="HSeparator" parent="Body"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 6.0
+margin/right = 1260.0
+margin/bottom = 9.0
+
+[node name="Spacer" type="Control" parent="Body"]
+
+rect/min_size = Vector2( 0, 15 )
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 13.0
+margin/right = 1260.0
+margin/bottom = 28.0
+
+[node name="Scroll" type="ScrollContainer" parent="Body"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 3
+size_flags/vertical = 3
+margin/left = 0.0
+margin/top = 32.0
+margin/right = 1260.0
+margin/bottom = 580.0
+scroll/horizontal = true
+scroll/vertical = true
+
+[node name="ClassProperties" type="VBoxContainer" parent="Body/Scroll"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = false
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 454.0
+margin/bottom = 14.0
+alignment = 0
+
+[node name="NoClassPropertiesLabel" type="Label" parent="Body/Scroll/ClassProperties"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 3
+size_flags/vertical = 0
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 454.0
+margin/bottom = 14.0
+text = "There are currently no class properties. Edit the Class to add new ones."
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+
