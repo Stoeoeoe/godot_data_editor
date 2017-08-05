@@ -16,13 +16,12 @@ This repository hosts a plugin for the [Godot Engine]. It allows users to enter 
 ![class_screenshot]
 
 # Installation
+* Download/clone this repository
 * Open your project folder, e.g. "../MyGame/"
-* Create a folder named "addons" (if not already present)
-* In addons, create a folder named "godot_data_editor" 
-* Copy the content of this repository into it. You may remove the "sceenshots"  ;)
+* Copy the "addons" folder into your project folder
 * Open your project in the editor and navigate to the plugin (Scene -> Project Settings -> Plugins)
 * The plugin "godot_data_editor" should now appear, change the status from "Inactive" to "Active"
-* Restart the editor to make sure that the _data_ singleton is loaded properly
+* Restart the editor to make sure that the _data_ singleton is loaded properly. If _data_ was not added, add a [singleton] to the class "addons/godot_data_editor/data.gd".
 
 I intend to upload the plugin to the AssetLib, once I feel it is stable enough.
 
@@ -30,8 +29,8 @@ I intend to upload the plugin to the AssetLib, once I feel it is stable enough.
 The plugin was written for version *2.1.3* of the Godot Engine. Upcoming minor versions should be supported as well.
 It is very likely that a number of changes will be necessary, once Godot 3 is released. 
 
-# API / Tutorial
-I created a little video which shows how to use the plugin to create a simple shop system:  [[Link to video which does not exist yet :) ]]
+# API / Demo
+There is a demo project available which shows how the plugin could be used in practice. Either download the file "DataEditorDemo.zip" or all content of the "demo" folder. It should be possible to simply import it.
 
 Working with data is rather simple, use the provided _data_ class to access the items. The following code snippets demonstrates item retrieval as well as the observation feature:
 ```gdscript
@@ -101,7 +100,6 @@ Please feel free to contribute. Unfortunately, the code base still is not docume
 * There is no support for undo/redo
 * Pressing Ctrl+S will not save the data items but the current scene
 * The _data_ singleton is only visible in the editor when the project is being restarted. This seems to be a limitation of the engine which does not allow reload the engine.cfg file
-* The "class overview" screen is lacking any kind of useful content
 
 # HALP! Something went wrong!
 Stay calm, most issues can be resolved by either pressing the "Reload" button or activating and deactivating the plugin. If the problem persists, there is likely an issue with your data. Check if the name of the class (which are stored in the "classes" folder by default) is the same as the folder name of your instances (by default called "data"). If this is the case, there might be a conflict with duplicate IDs or the like. Please post an issue here if this happened without any external influence (e.g. you edited the files manually in another editor).
@@ -109,6 +107,7 @@ Stay calm, most issues can be resolved by either pressing the "Reload" button or
 
 
 [Godot Engine]: <https://github.com/godotengine/godot>
+[singleton]: <http://docs.godotengine.org/en/stable/learning/step_by_step/singletons_autoload.html>
 [export property hints]: <http://docs.godotengine.org/en/latest/learning/scripting/gdscript/gdscript_basics.html#exports>
 [editor_screenshot]: https://github.com/Stoeoeoe/godot_data_editor/blob/master/screenshots/editor.png "The Godot Data Editor"
 [class_screenshot]: https://github.com/Stoeoeoe/godot_data_editor/blob/master/screenshots/class.png "Example Class"
