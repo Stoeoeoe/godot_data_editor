@@ -204,7 +204,7 @@ func create_string():
 		for i in range(0, hint_array.size()):
 			control.get_popup().add_item(hint_array[i])
 		control.set_flat(false)
-		control.set_text(value)
+		control.set_text(str(value))
 		control.get_popup().connect("item_pressed", self, "string_enum_property_value_changed", [])
 	elif hint == PROPERTY_HINT_MULTILINE_TEXT:
 		# RABRABRAB
@@ -356,6 +356,7 @@ func get_custom_editor_value(index):
 		else: return value.origin.z
 	
 func create_object_or_image():
+	value = str(value)
 	control = HBoxContainer.new()
 	object_type_line_edit = LineEdit.new()
 	object_type_line_edit.set_text(str(value))
