@@ -40,7 +40,7 @@ size_flags/vertical = 0
 margin/left = 0.0
 margin/top = 0.0
 margin/right = 1260.0
-margin/bottom = 2.0
+margin/bottom = 19.0
 custom_fonts/font = ExtResource( 2 )
 text = "No Classes"
 uppercase = true
@@ -55,9 +55,9 @@ focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
 margin/left = 0.0
-margin/top = 6.0
+margin/top = 23.0
 margin/right = 1260.0
-margin/bottom = 9.0
+margin/bottom = 26.0
 
 [node name="Spacer" type="Control" parent="Body"]
 
@@ -67,9 +67,9 @@ focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
 margin/left = 0.0
-margin/top = 13.0
+margin/top = 30.0
 margin/right = 1260.0
-margin/bottom = 28.0
+margin/bottom = 45.0
 
 [node name="Scroll" type="ScrollContainer" parent="Body"]
 
@@ -78,7 +78,7 @@ focus/stop_mouse = true
 size_flags/horizontal = 3
 size_flags/vertical = 3
 margin/left = 0.0
-margin/top = 32.0
+margin/top = 49.0
 margin/right = 1260.0
 margin/bottom = 580.0
 scroll/horizontal = true

@@ -5,6 +5,7 @@ var items = {}
 
 var class_names = []
 var classes = {}
+var invalid_classes = []
 
 var config_class_directory = ""
 var config_output_directory = ""
@@ -14,6 +15,7 @@ var config_password = ""
 var config_extension = ""
 var config_serializer = ""
 
+signal class_is_invalid(item_class)
 signal item_duplication_failed(title, reason)
 signal item_insertion_failed(title, reason)
 signal class_insertion_failed(title, reason)
@@ -61,7 +63,8 @@ var unsaved_items = []
 func store_unsaved_changes():
 	for item_class in items:
 		for item in items[item_class].values():
-			if item._dirty or not item._persistent:
+			# Check for id to prevent invalid entries from showing up
+			if item and item.get("_id") and (item._dirty or not item._persistent):
 				unsaved_items.append(item)
 	
 # Create a duplicate of the unsaved item because this will not mess up changed properties
@@ -78,6 +81,7 @@ func reload_unsaved_items():
 func initialize_variables():
 	items = {}
 	class_names = []
+	invalid_classes = []
 	classes = {}
 	
 	config_class_directory = ""
@@ -119,7 +123,10 @@ func load_classes():
 	classes = {}
 	for item_class in class_names:
 		classes[item_class] = load(config_class_directory + "/" + item_class + ".gd")
-		#classes[item_class].reload(true)
+		var error = classes[item_class].reload(true)
+		if not error == OK or not classes[item_class]:
+			emit_signal("class_is_invalid", item_class)
+			invalid_classes.append(item_class)			
 	pass
 
 
@@ -143,6 +150,10 @@ func load_items():
 	var directory = Directory.new()
 	for item_class in class_names:
 		items[item_class] = {}
+
+		if invalid_classes.has(item_class):
+			continue
+
 		directory.open(config_output_directory + "/" + item_class )
 		directory.list_dir_begin()
 		var file_name = directory.get_next()

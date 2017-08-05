@@ -146,4 +146,18 @@ shortcut = null
 text = "Add static property"
 flat = false
 
+[node name="Label" type="Label" parent="Panel/Body"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 0.0
+margin/top = 19.0
+margin/right = 1246.0
+margin/bottom = 33.0
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
 

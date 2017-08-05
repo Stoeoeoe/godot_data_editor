@@ -79,6 +79,7 @@ func _ready():
 	item_manager.connect("item_insertion_failed", self, "show_warning", [])
 	item_manager.connect("custom_property_insertion_failed", self, "show_warning", [])
 	item_manager.connect("item_duplication_failed", self, "show_warning", [])
+#	item_manager.connect("class_is_invalid", self, "show_warning", [])
 		
 	# Add types to the custom property type dropdown
 	var type_names = item_manager.type_names.keys()
@@ -193,10 +194,13 @@ func change_item_context(selected_item, selected_class):
 		delete_button.set_disabled(false)
 		copy_id_button.set_disabled(false)
 		edit_class_button.set_disabled(false)
-
 		self.selected_item = null
 		self.selected_id  = null
 		id_label.set_text(selected_class.capitalize())
+		if item_manager.invalid_classes.has(selected_class):
+			class_overview.set_label("There is a problem with this class, please check if there are any issues. Press 'Reload' once you are ready.")
+		else:
+			class_overview.set_label("")	
 		class_overview.show()
 		instance_details.hide()
 		no_classes.hide()
@@ -379,11 +383,7 @@ func copy_id():
 		OS.set_clipboard(selected_class)
 		
 func edit_class():
-	var script = null
-	if selected_item:
-		script = selected_item.get_script()
-	else:
-		script = item_manager.classes[selected_class].new("dummy").get_script() # If no item is selected, create a dummy item
+	var script = item_manager.classes[selected_class]
 	emit_signal("class_edit_requested", script)
 
 #####################################################

@@ -93,15 +93,13 @@ func something_changed(item, property, value):
 ```
 
 # Please Contribute!
-Please feel free to contribute. Unfortunately, the code base still is not documented that well and there are a number of bugs which will need to be ironed out. I am sure that there are a number of things I have been doing wrong, e.g. performance/memory management issues.
+Please feel free to contribute. Unfortunately, the code base still is not documented that well and there are a number of bugs which will need to be ironed out. I am sure that there are many things I have been doing wrong, especially in regard to memory management.
 
 # Known Issues
 * The "Rename Class" feature may not properly rename the class file if it still in use
-* There are a number of reference issues
-* In some cases, the controls are not properly resized - pressing "Reload" should usually do the trick though
-* A number of operations will perform a complete refresh of all data, which causes unsaved changes to disappear. This was done to prevent inconsistencies
+* In some cases, the controls are not correctly resized - pressing "Reload" should usually do the trick though
 * There is no support for undo/redo
-* Pressing Ctrl+S to save while in the data editor may temporarily hide unsaved items
+* Pressing Ctrl+S will not save the data items but the current scene
 * The _data_ singleton is only visible in the editor when the project is being restarted. This seems to be a limitation of the engine which does not allow reload the engine.cfg file
 * The "class overview" screen is lacking any kind of useful content
 

@@ -83,6 +83,8 @@ func load_tree(is_reload = false):
 	classes.sort()
 	for item_class in classes:
 		tree_elements[item_class] = {}
+		if item_manager.invalid_classes.has(item_class):
+			continue
 		
 		var ids = item_manager.items[item_class].keys()
 		ids.sort()
