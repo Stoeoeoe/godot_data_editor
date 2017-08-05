@@ -20,7 +20,8 @@ func popup(caller, callback_method, title, text, placeholder_1 = "", default_tex
 	self.placeholder_1 = placeholder_1
 	self.placeholder_2 = placeholder_2
 	
-	caller.connect("input_dialog_confirmed", caller, callback_method, [])
+	if not caller.is_connected("input_dialog_confirmed", caller, callback_method):
+		caller.connect("input_dialog_confirmed", caller, callback_method, [])
 	set_text(text)
 	set_title(title)
 	if placeholder_1 == "":

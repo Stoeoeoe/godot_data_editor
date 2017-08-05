@@ -43,7 +43,6 @@ func load_tree(is_reload = false):
 	plugin_config = ConfigFile.new()
 	plugin_config.load("res://addons/godot_data_editor/plugin.cfg")
 
-	
 	self.item_manager = Globals.get("item_manager")
 	tree_elements = {}
 	tree_roots = {}
@@ -54,7 +53,6 @@ func load_tree(is_reload = false):
 	last_selected = null
 	var tree_element_to_be_selected = null
 
-
 	# Store the class and name of the last selected item, in case the tree is reloaded
 	last_selected = tree.get_selected()
 	if last_selected:
@@ -64,8 +62,7 @@ func load_tree(is_reload = false):
 			else:
 				self.last_selected_id = null
 		self.last_selected_class = last_selected.get_meta("class")
-		#print(last_selected_id)
-		#print(last_selected_class)
+
 	
 	tree.clear()
 		

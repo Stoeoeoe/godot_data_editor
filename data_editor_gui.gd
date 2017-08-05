@@ -110,6 +110,9 @@ func _ready():
 		class_overview.hide()
 	else:
 		# Select the first item in the tree when loading the GUI
+		var all_classes = item_manager.classes.keys()
+		all_classes.sort()
+		selected_class = all_classes[0]
 		change_item_context(selected_item, selected_class)
 
 # TODO: Implement
@@ -295,10 +298,8 @@ func handle_actions(action, argument = ""):
 		if selected_item._dirty:
 			input_dialog.popup(self, "item_duplication_failed", tr("Item duplication failed"), tr("Before duplicating this item, please first save it."))			
 			return
-		if selected_id != selected_item._display_name:
-			new_display_name = selected_item._display_name
+		selected_item._display_name = ""
 		input_dialog.popup(self, "_on_duplicate_confirmed", tr("Duplicate Item"), tr("Please enter a new ID for this item"), "ID", selected_id, tr("Display Name (optional)"), new_display_name)
-		reload()
 	elif action == "save":
 		item_manager.save_item(selected_item)
 		item_tree.load_tree()
@@ -351,9 +352,9 @@ func _on_rename_class_confirmed(name):
 	
 
 func _on_duplicate_confirmed(id, display_name):
-	var duplicated_item = item_manager.duplicate_item(selected_item, id, display_name)
+	var duplicated_item = item_manager.duplicate_item(selected_item, id, display_name, false)
 	item_tree.add_leaf(duplicated_item, true)
-	
+	reload()
 		
 func _on_delete_item_confirmed():
 	item_manager.delete_item(selected_item)
