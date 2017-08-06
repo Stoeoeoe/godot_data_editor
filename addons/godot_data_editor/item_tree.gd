@@ -25,29 +25,29 @@ signal on_item_selected(item, is_leaf)		# Emitted when a tree item is selected, 
 var last_selected = null			# Reference to last selected item
 var last_selected_id = ""			# Name/id of last selected item
 var last_selected_class = ""		# Name/id of last selected class
+var collapsed_item_classes = []		# Contains a list of all item classes/tree items which were expanded before reloading
 
-var plugin_config 
+var plugin_config = null
 
-var filter = ""
+var filter = ""						# Tree filter
 
 # Load the tree when ready	
 func _ready():
-#	test = EditorPlugin.new()
 	tree.set_hide_root(true)
 	tree.set_select_mode(Tree.SELECT_SINGLE)
-	tree.set_allow_rmb_select(true)	
+	tree.set_allow_rmb_select(true)
 	load_tree()
 
 	
 func load_tree(is_reload = false):
+	save_collapsed_state()
+
 	plugin_config = ConfigFile.new()
 	plugin_config.load("res://addons/godot_data_editor/plugin.cfg")
 
 	self.item_manager = Globals.get("item_manager")
 	tree_elements = {}
 	tree_roots = {}
-	#filter_control.set_text("")
-	#filter = ""
 	last_selected_id = ""
 	last_selected_class = ""
 	last_selected = null
@@ -66,7 +66,6 @@ func load_tree(is_reload = false):
 	
 	tree.clear()
 		
-	
 	# Create the roots for each item class, e.g. actors, monsters, crystals...
 	dummy_root = tree.create_item()
 	tree_elements["_roots"] = {}
@@ -101,13 +100,15 @@ func load_tree(is_reload = false):
 	else:
 		tree_element_to_be_selected = null			# No elements to be selected
 		
-	last_selected
 		
 	# Handle filter
 	if tree_element_to_be_selected and not filter_control.has_focus():
 		tree.grab_focus()
 		tree_element_to_be_selected.select(0)
-	
+
+	# Collapse all class tree items which were previously collapsed
+	restore_collapsed_state()
+
 func create_item_root(item_class):
 	var tree_item = tree.create_item(dummy_root)
 	tree_item.set_selectable(0, true)
@@ -219,10 +220,25 @@ func select_class(item_class):
 	if tree_elements["_roots"].has(item_class):
 		tree_elements["_roots"][item_class].select(0)
 
-
+# Updates the filter and reloads the tree. Quite radical.
 func _on_Filter_text_changed( text ):
 	self.filter = text
 	load_tree()
+	
+# Saves the collapsed tree items
+func save_collapsed_state():
+	for item_class in tree_roots:
+		if tree_roots[item_class].is_collapsed():
+			collapsed_item_classes.append(item_class)
+		
+
+# Expands the tree items which were not collapsed before
+func restore_collapsed_state():
+	for item_class in collapsed_item_classes:
+		if tree_roots.has(item_class):
+			tree_roots[item_class].set_collapsed(true)
+	pass
+	collapsed_item_classes = []
 
 
 
