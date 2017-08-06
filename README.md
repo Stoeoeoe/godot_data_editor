@@ -14,6 +14,7 @@ This repository hosts a plugin for the [Godot Engine]. It allows users to enter 
 # Screenshots
 ![editor_screenshot]
 ![class_screenshot]
+![data_access]
 
 # Installation
 * Download/clone this repository
@@ -111,3 +112,4 @@ Stay calm, most issues can be resolved by either pressing the "Reload" button or
 [export property hints]: <http://docs.godotengine.org/en/latest/learning/scripting/gdscript/gdscript_basics.html#exports>
 [editor_screenshot]: https://github.com/Stoeoeoe/godot_data_editor/blob/master/screenshots/editor.png "The Godot Data Editor"
 [class_screenshot]: https://github.com/Stoeoeoe/godot_data_editor/blob/master/screenshots/class.png "Example Class"
+[data_access]: https://github.com/Stoeoeoe/godot_data_editor/blob/master/screenshots/data_access.png "Example Data Access"
