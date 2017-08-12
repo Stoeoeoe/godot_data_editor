@@ -130,7 +130,7 @@ func _on_Options_confirmed():
 		config.set_value("custom", "serializer", serializer)
 		config.set_value("custom", "encrypt", encrypt)
 		config.set_value("custom", "password", password)
-		config.set_value("custom", "class_directory", output_directory)		
+		config.set_value("custom", "class_directory", class_directory)		
 		config.set_value("custom", "output_directory", output_directory)		
 		config.set_value("custom", "sanitize_ids", sanitize_ids)	
 		config.save("res://addons/godot_data_editor/plugin.cfg")
