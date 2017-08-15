@@ -101,6 +101,7 @@ Please feel free to contribute. Unfortunately, the code base still is not docume
 * There is no support for undo/redo
 * Pressing Ctrl+S will not save the data items but the current scene
 * The _data_ singleton is only visible in the editor when the project is being restarted. This seems to be a limitation of the engine which does not allow reload the engine.cfg file
+* The "New Class" dialog is not displayed correctly under certain resolutions
 
 # HALP! Something went wrong!
 Stay calm, most issues can be resolved by either pressing the "Reload" button or activating and deactivating the plugin. If the problem persists, there is likely an issue with your data. Check if the name of the class (which are stored in the "classes" folder by default) is the same as the folder name of your instances (by default called "data"). If this is the case, there might be a conflict with duplicate IDs or the like. Please post an issue here if this happened without any external influence (e.g. you edited the files manually in another editor).
