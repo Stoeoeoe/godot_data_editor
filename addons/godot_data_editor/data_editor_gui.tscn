@@ -60,7 +60,7 @@ size_flags/horizontal = 2
 size_flags/vertical = 0
 margin/left = 0.0
 margin/top = 0.0
-margin/right = 1280.0
+margin/right = 1024.0
 margin/bottom = 28.0
 alignment = 0
 
@@ -281,23 +281,6 @@ icon = ExtResource( 9 )
 flat = true
 align = 0
 
-[node name="Search" type="LineEdit" parent="VBox/Head"]
-
-visibility/visible = false
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = 377.0
-margin/top = 0.0
-margin/right = 435.0
-margin/bottom = 28.0
-placeholder/text = "Search"
-placeholder/alpha = 0.6
-focus_mode = 2
-caret/caret_blink = false
-caret/caret_blink_speed = 0.65
-
 [node name="HSeparator" type="HSeparator" parent="VBox"]
 
 focus/ignore_mouse = false
@@ -306,7 +289,7 @@ size_flags/horizontal = 2
 size_flags/vertical = 2
 margin/left = 0.0
 margin/top = 32.0
-margin/right = 1280.0
+margin/right = 1024.0
 margin/bottom = 35.0
 
 [node name="Body" type="HSplitContainer" parent="VBox"]
@@ -317,7 +300,7 @@ size_flags/horizontal = 3
 size_flags/vertical = 3
 margin/left = 0.0
 margin/top = 39.0
-margin/right = 1280.0
+margin/right = 1024.0
 margin/bottom = 600.0
 split/offset = 0
 split/collapsed = false
@@ -342,7 +325,7 @@ size_flags/horizontal = 3
 size_flags/vertical = 3
 margin/left = 177.0
 margin/top = 0.0
-margin/right = 1280.0
+margin/right = 1024.0
 margin/bottom = 561.0
 
 [node name="VBox" type="VBoxContainer" parent="VBox/Body/Content"]
@@ -369,7 +352,7 @@ size_flags/horizontal = 2
 size_flags/vertical = 2
 margin/left = 0.0
 margin/top = 0.0
-margin/right = 1103.0
+margin/right = 847.0
 margin/bottom = 25.0
 
 [node name="HBox" type="HBoxContainer" parent="VBox/Body/Content/VBox/Container"]
@@ -380,7 +363,7 @@ size_flags/horizontal = 2
 size_flags/vertical = 2
 margin/left = 8.0
 margin/top = 0.0
-margin/right = 1103.0
+margin/right = 847.0
 margin/bottom = 25.0
 custom_constants/separation = 15
 alignment = 2
@@ -391,9 +374,9 @@ focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 0
 size_flags/vertical = 2
-margin/left = 722.0
+margin/left = 466.0
 margin/top = 0.0
-margin/right = 892.0
+margin/right = 636.0
 margin/bottom = 25.0
 disabled = true
 toggle_mode = false
@@ -410,9 +393,9 @@ focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 0
 size_flags/vertical = 2
-margin/left = 907.0
+margin/left = 651.0
 margin/top = 0.0
-margin/right = 988.0
+margin/right = 732.0
 margin/bottom = 25.0
 toggle_mode = false
 enabled_focus_mode = 2
@@ -428,9 +411,9 @@ focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 0
 size_flags/vertical = 2
-margin/left = 1003.0
+margin/left = 747.0
 margin/top = 0.0
-margin/right = 1095.0
+margin/right = 839.0
 margin/bottom = 25.0
 toggle_mode = false
 enabled_focus_mode = 2
@@ -448,13 +431,13 @@ size_flags/horizontal = 2
 size_flags/vertical = 0
 margin/left = 8.0
 margin/top = 0.0
-margin/right = 1103.0
+margin/right = 847.0
 margin/bottom = 25.0
 custom_fonts/font = ExtResource( 14 )
 custom_colors/font_color_shadow = Color( 0.300781, 0.300781, 0.300781, 1 )
 custom_constants/shadow_offset_x = 1
 custom_constants/shadow_offset_y = 1
-text = "Actor"
+text = "Element"
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
@@ -466,9 +449,9 @@ focus/ignore_mouse = false
 focus/stop_mouse = false
 size_flags/horizontal = 0
 size_flags/vertical = 2
-margin/left = 555.0
+margin/left = 427.0
 margin/top = 0.0
-margin/right = 555.0
+margin/right = 427.0
 margin/bottom = 25.0
 custom_constants/hseparation = 10
 columns = 2
@@ -546,7 +529,7 @@ size_flags/horizontal = 2
 size_flags/vertical = 2
 margin/left = 8.0
 margin/top = 0.0
-margin/right = 1103.0
+margin/right = 847.0
 margin/bottom = 25.0
 alignment = 0
 
@@ -558,7 +541,7 @@ size_flags/horizontal = 3
 size_flags/vertical = 2
 margin/left = 0.0
 margin/top = 29.0
-margin/right = 1103.0
+margin/right = 847.0
 margin/bottom = 32.0
 
 [node name="Spacer" type="Control" parent="VBox/Body/Content/VBox"]
@@ -570,7 +553,7 @@ size_flags/horizontal = 3
 size_flags/vertical = 2
 margin/left = 0.0
 margin/top = 36.0
-margin/right = 1103.0
+margin/right = 847.0
 margin/bottom = 46.0
 
 [node name="InstanceDetails" type="PanelContainer" parent="VBox/Body/Content/VBox"]
@@ -582,8 +565,8 @@ size_flags/horizontal = 3
 size_flags/vertical = 3
 margin/left = 0.0
 margin/top = 50.0
-margin/right = 1103.0
-margin/bottom = 561.0
+margin/right = 847.0
+margin/bottom = 303.0
 
 [node name="HBox" type="HBoxContainer" parent="VBox/Body/Content/VBox/InstanceDetails"]
 
@@ -593,16 +576,16 @@ size_flags/horizontal = 3
 size_flags/vertical = 3
 margin/left = 7.0
 margin/top = 7.0
-margin/right = 1096.0
-margin/bottom = 504.0
+margin/right = 840.0
+margin/bottom = 246.0
 alignment = 0
 
 [node name="ClassProperties" parent="VBox/Body/Content/VBox/InstanceDetails/HBox" instance=ExtResource( 15 )]
 
 anchor/right = 0
 anchor/bottom = 0
-margin/right = 542.0
-margin/bottom = 497.0
+margin/right = 414.0
+margin/bottom = 239.0
 
 [node name="CustomProperties" parent="VBox/Body/Content/VBox/InstanceDetails/HBox" instance=ExtResource( 16 )]
 
@@ -610,16 +593,16 @@ anchor/right = 0
 anchor/bottom = 0
 size_flags/horizontal = 3
 size_flags/vertical = 3
-margin/left = 546.0
-margin/right = 1089.0
-margin/bottom = 497.0
+margin/left = 418.0
+margin/right = 833.0
+margin/bottom = 239.0
 
 [node name="ClassOverview" parent="VBox/Body/Content/VBox" instance=ExtResource( 17 )]
 
 anchor/right = 0
 anchor/bottom = 0
 margin/top = 50.0
-margin/right = 1103.0
+margin/right = 847.0
 margin/bottom = 561.0
 
 [node name="NoClasses" parent="VBox/Body/Content/VBox" instance=ExtResource( 18 )]
@@ -650,15 +633,13 @@ script/script = ExtResource( 19 )
 
 [node name="NewClassDialog" type="ConfirmationDialog" parent="."]
 
-editor/display_folded = true
-visibility/visible = false
 focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
-margin/left = 519.0
+margin/left = 396.0
 margin/top = 193.0
-margin/right = 990.0
+margin/right = 915.0
 margin/bottom = 316.0
 popup/exclusive = true
 window/title = "New Class"
@@ -667,23 +648,30 @@ dialog/hide_on_ok = true
 
 [node name="ClassName" type="LineEdit" parent="NewClassDialog"]
 
+anchor/top = 3
+anchor/right = 1
+anchor/bottom = 3
 focus_neighbour/bottom = NodePath("../ClassIconPath")
 focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
 margin/left = 8.0
-margin/top = 27.0
-margin/right = 466.0
-margin/bottom = 51.0
+margin/top = 34.5
+margin/right = 8.0
+margin/bottom = 10.5
 placeholder/text = "Name"
 placeholder/alpha = 0.6
+expand_to_len = false
 focus_mode = 2
 caret/caret_blink = false
 caret/caret_blink_speed = 0.65
 
 [node name="ClassIconPath" type="LineEdit" parent="NewClassDialog"]
 
+anchor/top = 3
+anchor/right = 1
+anchor/bottom = 3
 focus_neighbour/top = NodePath("../ClassName")
 focus_neighbour/right = NodePath("../NewClassIconSearchButton")
 focus/ignore_mouse = false
@@ -691,11 +679,12 @@ focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
 margin/left = 8.0
-margin/top = 60.0
-margin/right = 393.0
-margin/bottom = 84.0
+margin/top = 1.5
+margin/right = 86.0
+margin/bottom = -22.5
 placeholder/text = "Icon Path (optional)"
 placeholder/alpha = 0.6
+expand_to_len = false
 focus_mode = 2
 caret/caret_blink = false
 caret/caret_blink_speed = 0.65
@@ -721,15 +710,19 @@ show_hidden_files = false
 
 [node name="NewClassIconSearchButton" type="Button" parent="NewClassDialog"]
 
+anchor/left = 1
+anchor/top = 3
+anchor/right = 1
+anchor/bottom = 3
 focus_neighbour/left = NodePath("../ClassIconPath")
 focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
-margin/left = 399.0
-margin/top = 61.0
-margin/right = 466.0
-margin/bottom = 83.0
+margin/left = 80.0
+margin/top = 0.5
+margin/right = 8.0
+margin/bottom = -21.5
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
@@ -775,6 +768,7 @@ margin/right = 363.0
 margin/bottom = 53.0
 placeholder/text = "Name"
 placeholder/alpha = 0.6
+expand_to_len = false
 focus_mode = 2
 caret/caret_blink = false
 caret/caret_blink_speed = 0.65

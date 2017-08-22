@@ -22,7 +22,8 @@ This repository hosts a plugin for the [Godot Engine]. It allows users to enter 
 * Copy the "addons" folder into your project folder
 * Open your project in the editor and navigate to the plugin (Scene -> Project Settings -> Plugins)
 * The plugin "godot_data_editor" should now appear, change the status from "Inactive" to "Active"
-* Restart the editor to make sure that the _data_ singleton is loaded properly. If _data_ was not added, add a [singleton] to the class "addons/godot_data_editor/data.gd".
+* Add the _data_ singleton which allows you to access the data later on. To do so, go to the Project Settings -> AutoLoad, then enter "addons/godot_data_editor/data.gd" as path and "data" as Node Name. Save the singleton by clicking on "Add".
+![singleton]
 
 I intend to upload the plugin to the AssetLib, once I feel it is stable enough.
 
@@ -100,8 +101,11 @@ Please feel free to contribute. Unfortunately, the code base still is not docume
 * In some cases, the controls are not correctly resized - pressing "Reload" should usually do the trick though
 * There is no support for undo/redo
 * Pressing Ctrl+S will not save the data items but the current scene
-* The _data_ singleton is only visible in the editor when the project is being restarted. This seems to be a limitation of the engine which does not allow reload the engine.cfg file
-* The "New Class" dialog is not displayed correctly under certain resolutions
+* Originally, the _data_ singleton was stored automatically in the engine.cfg configuration as soon as the plugin was loaded. This has lead to various issues though. For that reason, _data_ must currently be added manually. 
+* Internationalization is still lacking
+* Under certain circumstances, integers cannot be entered
+
+Please post any issues you encounter.
 
 # HALP! Something went wrong!
 Stay calm, most issues can be resolved by either pressing the "Reload" button or activating and deactivating the plugin. If the problem persists, there is likely an issue with your data. Check if the name of the class (which are stored in the "classes" folder by default) is the same as the folder name of your instances (by default called "data"). If this is the case, there might be a conflict with duplicate IDs or the like. Please post an issue here if this happened without any external influence (e.g. you edited the files manually in another editor).
@@ -114,3 +118,4 @@ Stay calm, most issues can be resolved by either pressing the "Reload" button or
 [editor_screenshot]: https://github.com/Stoeoeoe/godot_data_editor/blob/master/screenshots/editor.png "The Godot Data Editor"
 [class_screenshot]: https://github.com/Stoeoeoe/godot_data_editor/blob/master/screenshots/class.png "Example Class"
 [data_access]: https://github.com/Stoeoeoe/godot_data_editor/blob/master/screenshots/data_access.png "Example Data Access"
+[singleton]: https://github.com/Stoeoeoe/godot_data_editor/blob/master/screenshots/singleton.png "Data Singleton"

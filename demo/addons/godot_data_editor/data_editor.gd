@@ -11,7 +11,8 @@ signal data_item_class_opened(item_class)
 	
 func _enter_tree():	
 	OS.set_low_processor_usage_mode(true)
-	check_for_data_singleton()
+	# Currently, adding the singleton automatically, does not work
+	#check_for_data_singleton()
 	check_plugin_settings()
 	gui = data_editor_class.instance()
 	get_editor_viewport().add_child(gui)
@@ -23,36 +24,35 @@ func _enter_tree():
 func _exit_tree():
 	OS.set_low_processor_usage_mode(false)
 	get_editor_viewport().remove_child(gui)
-	gui.free()
+	if gui:
+		gui.free()
 	var config = ConfigFile.new()
-	var status = config.load("res://engine.cfg")
-	if status == OK:
-		if config.has_section_key("autoload", "data"):
-			config.set_value("autoload", "data", null)
-			config.save("res://engine.cfg")
+	#var status = config.load("res://engine.cfg")
+	#if status == OK:
+	#	if not config.has_section_key("autoload", "data"):
+	#		config.set_value("autoload", "data", null)
+	#		config.save("res://engine.cfg")
+			
 		# Check if the Classes and Data folders exist
 	Globals.clear("item_manager")
 	
 func _ready():
 	gui.connect("class_edit_requested", self, "edit_class", [])
-	Globals.set("debug_is_editor", true)	
+	Globals.set("debug_is_editor", true)
 
 # Opens the selected class in the Script Editor
 func edit_class(item_class):
 	edit_resource(item_class)
 	
 	
+# TODO: Maybe there is a way  to refresh the tree without restart?
 func check_for_data_singleton():
-	var config = ConfigFile.new()
-	var status = config.load("res://engine.cfg")
-
-	
-	if status == OK:
-		if not config.has_section_key("autoload", "data"):
-			config.set_value("autoload", "data", "*res://addons/godot_data_editor/data.gd")
-			config.save("res://engine.cfg")
-		#var directory = Directory.new()
-		#directory.copy("res://engine.cfg", "res://engine.cfg_BACKUP")
+	pass
+	#var config = ConfigFile.new()
+	#var status = config.load("res://engine.cfg")
+	#if status == OK and not config.has_section_key("autoload", "data"):
+	#	config.set_value("autoload", "data", "*res://addons/godot_data_editor/data.gd")
+	#	config.save("res://engine.cfg") 
 	
 # Load the plugin settings and adds default if they do not exist.
 # TODO: Obtain defaults from dialog
@@ -87,11 +87,10 @@ func has_main_screen():
 
 # Virtual: 
 func make_visible(visible):
-	if(visible):
+	if gui and visible:
 		gui.reload()
 		gui.show()
-
-	else:
+	elif gui:
 		gui.hide()
 		 
 
