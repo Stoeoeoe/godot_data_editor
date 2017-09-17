@@ -22,10 +22,10 @@ This repository hosts a plugin for the [Godot Engine]. It allows users to enter 
 * Copy the "addons" folder into your project folder
 * Open your project in the editor and navigate to the plugin (Scene -> Project Settings -> Plugins)
 * The plugin "godot_data_editor" should now appear, change the status from "Inactive" to "Active"
-* Add the _data_ singleton which allows you to access the data later on. To do so, go to the Project Settings -> AutoLoad, then enter "addons/godot_data_editor/data.gd" as path and "data" as Node Name. Save the singleton by clicking on "Add".
+* IMPORTANT: Add the _data_ singleton which allows you to access the data later on. To do so, go to the Project Settings -> AutoLoad, then enter "addons/godot_data_editor/data.gd" as path and "data" as Node Name. Save the singleton by clicking on "Add".
 ![singleton]
 
-I intend to upload the plugin to the AssetLib, once I feel it is stable enough.
+You can also download the addon in the Asset Lib, make sure to exclude the "demo" folder though :)
 
 # System Requirements
 The plugin was written for version *2.1.3* of the Godot Engine. Upcoming minor versions should be supported as well.
@@ -104,11 +104,12 @@ Please feel free to contribute. Unfortunately, the code base still is not docume
 * Originally, the _data_ singleton was stored automatically in the engine.cfg configuration as soon as the plugin was loaded. This has lead to various issues though. For that reason, _data_ must currently be added manually. 
 * Internationalization is still lacking
 * Under certain circumstances, integers cannot be entered
+* There is an issue with the color control whereby the default value indicated in the class is not being taken into account
 
 Please post any issues you encounter.
 
 # HALP! Something went wrong!
-Stay calm, most issues can be resolved by either pressing the "Reload" button or activating and deactivating the plugin. If the problem persists, there is likely an issue with your data. Check if the name of the class (which are stored in the "classes" folder by default) is the same as the folder name of your instances (by default called "data"). If this is the case, there might be a conflict with duplicate IDs or the like. Please post an issue here if this happened without any external influence (e.g. you edited the files manually in another editor).
+Stay calm, most issues can be resolved by either pressing the "Reload" button or deactivating and activating the plugin. If the problem persists, there may be an issue with your data. Check if the name of the class (which are stored in the "classes" folder by default) is the same as the folder name of your instances (by default called "data"). If this is the case, there might be a conflict with duplicate IDs or the like. Please post an issue here if this happened without any external influence (e.g. you edited the files manually in another editor). 
 
 
 
