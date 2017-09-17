@@ -374,9 +374,9 @@ focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 0
 size_flags/vertical = 2
-margin/left = 466.0
+margin/left = 297.0
 margin/top = 0.0
-margin/right = 636.0
+margin/right = 467.0
 margin/bottom = 25.0
 disabled = true
 toggle_mode = false
@@ -384,6 +384,24 @@ enabled_focus_mode = 2
 shortcut = null
 text = "Change Display Name"
 icon = ExtResource( 11 )
+flat = true
+align = 0
+
+[node name="CopyGetItem" type="ToolButton" parent="VBox/Body/Content/VBox/Container/HBox"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 0
+size_flags/vertical = 2
+margin/left = 482.0
+margin/top = 0.0
+margin/right = 636.0
+margin/bottom = 25.0
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+text = "Copy \"get_item(...)\""
+icon = ExtResource( 12 )
 flat = true
 align = 0
 
@@ -633,6 +651,7 @@ script/script = ExtResource( 19 )
 
 [node name="NewClassDialog" type="ConfirmationDialog" parent="."]
 
+visibility/visible = false
 focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
@@ -662,7 +681,6 @@ margin/right = 8.0
 margin/bottom = 10.5
 placeholder/text = "Name"
 placeholder/alpha = 0.6
-expand_to_len = false
 focus_mode = 2
 caret/caret_blink = false
 caret/caret_blink_speed = 0.65
@@ -684,7 +702,6 @@ margin/right = 86.0
 margin/bottom = -22.5
 placeholder/text = "Icon Path (optional)"
 placeholder/alpha = 0.6
-expand_to_len = false
 focus_mode = 2
 caret/caret_blink = false
 caret/caret_blink_speed = 0.65
@@ -768,7 +785,6 @@ margin/right = 363.0
 margin/bottom = 53.0
 placeholder/text = "Name"
 placeholder/alpha = 0.6
-expand_to_len = false
 focus_mode = 2
 caret/caret_blink = false
 caret/caret_blink_speed = 0.65
@@ -812,6 +828,8 @@ items = [ "BOOL", null, false, -1, 1, "COLOR", null, false, -1, 14, "IMAGE", nul
 [connection signal="button_down" from="VBox/Head/Options" to="." method="handle_actions" binds= [ "options" ]]
 
 [connection signal="button_down" from="VBox/Body/Content/VBox/Container/HBox/DisplayName" to="." method="handle_actions" binds= [ "change_display_name" ]]
+
+[connection signal="button_down" from="VBox/Body/Content/VBox/Container/HBox/CopyGetItem" to="." method="handle_actions" binds= [ "copy_get_item" ]]
 
 [connection signal="button_down" from="VBox/Body/Content/VBox/Container/HBox/CopyId" to="." method="handle_actions" binds= [ "copy_id" ]]
 

@@ -33,6 +33,7 @@ onready var save_all_button = get_node("VBox/Head/SaveAll")
 
 onready var copy_id_button = get_node("VBox/Body/Content/VBox/Container/HBox/CopyId")
 onready var edit_class_button = get_node("VBox/Body/Content/VBox/Container/HBox/EditClass")
+onready var copy_get_item_button = get_node("VBox/Body/Content/VBox/Container/HBox/CopyGetItem")
 
 # Dialogs
 onready var input_dialog = get_node("InputDialog")
@@ -58,7 +59,9 @@ func _init():
 	item_manager = preload("item_manager.gd").new()			# This item_manager will add itself to the globals
 
 func _ready():	
-	Globals.set("debug_is_editor", false)	
+	Globals.set("debug_is_editor", false)
+
+	
 	# Tree signals
 	item_tree.connect("on_new_item_pressed", self, "handle_actions", ["add"])
 	item_tree.connect("on_rename_pressed", self, "handle_actions", ["rename"])
@@ -79,8 +82,8 @@ func _ready():
 	item_manager.connect("item_insertion_failed", self, "show_warning", [])
 	item_manager.connect("custom_property_insertion_failed", self, "show_warning", [])
 	item_manager.connect("item_duplication_failed", self, "show_warning", [])
-#	item_manager.connect("class_is_invalid", self, "show_warning", [])
-		
+#	item_manager.connect("class_is_invalid", self, "show_warning", [])	
+	
 	# Add types to the custom property type dropdown
 	var type_names = item_manager.type_names.keys()
 	type_names.sort()
@@ -104,6 +107,7 @@ func _ready():
 		delete_button.set_disabled(true)
 		copy_id_button.set_disabled(true)
 		edit_class_button.set_disabled(true)
+		copy_get_item_button.set_disabled(true)
 		no_classes.show()
 		id_label.set_text("No Classes")
 		instance_details.hide()
@@ -135,7 +139,6 @@ func change_item_context(selected_item, selected_class):
 	if selected_class:
 		self.selected_class = selected_class
 
-
 			
 	# TODO: Move to method, clean up
 	var has_no_classes = item_manager.classes.size() == 0
@@ -150,6 +153,7 @@ func change_item_context(selected_item, selected_class):
 		delete_button.set_disabled(true)
 		copy_id_button.set_disabled(true)
 		edit_class_button.set_disabled(true)
+		copy_get_item_button.set_disabled(true)
 		no_classes.show()
 		instance_details.hide()
 		class_overview.hide()
@@ -173,6 +177,7 @@ func change_item_context(selected_item, selected_class):
 		delete_button.set_disabled(false)
 		copy_id_button.set_disabled(false)
 		edit_class_button.set_disabled(false)
+		copy_get_item_button.set_disabled(false)
 
 		self.selected_item = selected_item
 		self.selected_id = selected_item._id
@@ -197,6 +202,7 @@ func change_item_context(selected_item, selected_class):
 		delete_button.set_disabled(false)
 		copy_id_button.set_disabled(false)
 		edit_class_button.set_disabled(false)
+		copy_get_item_button.set_disabled(true)
 		self.selected_item = null
 		self.selected_id  = null
 		id_label.set_text(selected_class.capitalize())
@@ -324,6 +330,8 @@ func handle_actions(action, argument = ""):
 		edit_class()		
 	elif action == "copy_id":
 		copy_id()
+	elif action == "copy_get_item":
+		copy_get_item()
 	elif action == "change_display_name":
 		input_dialog.popup(self, "change_display_name", tr("Change Display Name"), tr("Please enter a display name for this item."), "Display Name", selected_item._display_name)
 	elif action == "add_custom_property":
@@ -382,7 +390,13 @@ func copy_id():
 		OS.set_clipboard(selected_id)
 	else:
 		OS.set_clipboard(selected_class)
+
+func copy_get_item():
+	if selected_item:
+		var copy_string = "data.get_item(\"" + selected_class + "\", \"" + selected_id + "\")"
+		OS.set_clipboard(copy_string)
 		
+						
 func edit_class():
 	var script = item_manager.classes[selected_class]
 	emit_signal("class_edit_requested", script)
@@ -403,3 +417,5 @@ func log_text(text):
 	var old_text = file.get_as_text()
 	var date = str(OS.get_datetime()["hour"]) + ":" + str(OS.get_datetime()["minute"]) + ":" + str(OS.get_datetime()["second"]) + "\t"
 	file.store_line(old_text + date + text)
+
+
