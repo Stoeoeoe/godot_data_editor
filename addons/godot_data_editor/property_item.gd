@@ -132,73 +132,60 @@ func create_bool():
 func create_number():
 	if value == null:
 		value = 0
-	if hint == PROPERTY_HINT_RANGE:
-		var control_min = -16777216
-		var control_max = 16777216
-
-		var control_step = 0
-		if type == TYPE_INT:
-			control_step = 1
-		else:
-			control_step = 0.00001
-
-		if number_of_hints >= 1:
-			if not hint_array[0].empty():
-				control_min = int(hint_array[0])
-					
-		if number_of_hints >= 2:
-			if not hint_array[1].empty():
-				control_max = int(hint_array[1])
-			
-		if number_of_hints >= 3:
-			if not hint_array[2].empty():
-				control_step = float(hint_array[2])
-		
-		# TODO: This does not seem to be exposed in GDScript yet?	
-		if number_of_hints >= 4 and hint_array[3] == "slider":
-			control = HSlider.new()
-			control.set_min(control_min)
-			control.set_max(control_max)
-			control.set_step(control_step)
-			control.set_value(value);
-			control.connect("value_changed", self, "property_value_changed", [])
-			#controlset_size(Size2(110,30)*EDSCALE);
-		else:
-			control = SpinBox.new()
-			control.set_min(control_min)
-			control.set_max(control_max)
-			control.set_step(control_step) 
-			control.set_value(value)
-			control.connect("value_changed", self, "property_value_changed", [])
-			#set_size(Size2(70,35)*EDSCALE);
-	elif hint == PROPERTY_HINT_ENUM:
+				
+	if hint == PROPERTY_HINT_ENUM:
 		control = MenuButton.new()
 		for i in range(0, hint_array.size()):
 			control.get_popup().add_item(hint_array[i])
 		control.set_flat(false)
-#			control.set_pos(get_pos())
 		control.set_text(control.get_popup().get_item_text(value))
 		control.get_popup().connect("item_pressed", self, "int_enum_property_value_changed", [])
-
+		
 	elif hint == PROPERTY_HINT_EXP_EASING:
 		control = get_not_yet_supported()
+		
 	elif hint == PROPERTY_HINT_FLAGS:
 		control = get_not_yet_supported()
+	# Range or no hints at all
 	else:
+		var control_max
+		var control_min
+		var control_step
+	
+		if type == TYPE_INT:
+			control_min = -2147483647
+			control_max = 2147483647
+			control_step = 1
+		elif type == TYPE_REAL:
+			control_min = -16777216
+			control_max = 16777216
+			control_step = 0.00001
+			
+		# Set minimum, if defined
+		if number_of_hints >= 1:
+			if not hint_array[0].empty():
+				control_min = int(hint_array[0])
+					
+		# Set maximum, if defined
+		if number_of_hints >= 2:
+			if not hint_array[1].empty():
+				control_max = int(hint_array[1])
+		
+		# Set control step, if defined
+		if number_of_hints >= 3:
+			if not hint_array[2].empty():
+				control_step = float(hint_array[2])
+		
+
 		control = SpinBox.new()
-		control.set_value(value);
-		if type == TYPE_REAL:
-			control.set_min(-16777216)
-			control.set_max(16777216)
-			control.set_step(0.00001)
-		else:
-			control.set_max(2147483647)
-			control.set_min(-2147483647)
-			control.set_step(1)
+		control.set_min(control_min)
+		control.set_max(control_max)
+		control.set_step(control_step) 
+		control.set_value(value)
+		control.get_line_edit().connect("text_changed", self, "property_value_changed", [])
 		control.connect("value_changed", self, "property_value_changed", [])
-		#control = create_custom_editor_button(value);
-		#create_custom_editor(1, 1, 50, ["value"])
-		#custom_editor_value_applied()
+
+		
 
 func create_string():
 	if hint == PROPERTY_HINT_ENUM:
@@ -445,10 +432,11 @@ func set_checkbox_label(value):
 func property_value_changed(value):
 	if type == TYPE_INT:
 		value = int(value)
-	if type == TYPE_REAL:
+	elif type == TYPE_REAL:
 		value = float(value)
-	if type == TYPE_COLOR:
+	elif type == TYPE_COLOR:
 		value = Color(value)
+	
 	if self.value != value:
 		self.value = value
 		emit_signal("on_property_value_changed", property_name, value)	
