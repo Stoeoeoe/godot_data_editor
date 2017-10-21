@@ -32,9 +32,9 @@ The plugin was written for version *2.1.3* of the Godot Engine. Upcoming minor v
 It is very likely that a number of changes will be necessary, once Godot 3 is released. 
 
 # API / Demo
-There is a demo project available which shows how the plugin could be used in practice. Either download the file "DataEditorDemo.zip" or all content of the "demo" folder. It should be possible to simply import it.
+There is a demo project available which shows how the plugin could be used in practice. Clone the repository and open the engine.cfg in the "demo" directory. 
 
-Working with data is rather simple, use the provided _data_ class to access the items. The following code snippets demonstrates item retrieval as well as the observation feature:
+Working with data is rather simple, use the provided _data_ class to access items. The following code snippets demonstrates item retrieval as well as the observation feature:
 ```gdscript
 extends Node
 
@@ -105,6 +105,7 @@ Please feel free to contribute. Unfortunately, the code base still is not docume
 * Internationalization is still lacking
 * Under certain circumstances, integers cannot be entered
 * There is an issue with the color control whereby the default value indicated in the class is not being taken into account
+* No Godot 3 support yet ;)
 
 Please post any issues you encounter.
 
