@@ -130,6 +130,8 @@ func create_bool():
 	control.connect("toggled", self, "property_value_changed", [])
 
 func create_number():
+	if value == null:
+		value = 0
 	if hint == PROPERTY_HINT_RANGE:
 		var control_min = -16777216
 		var control_max = 16777216

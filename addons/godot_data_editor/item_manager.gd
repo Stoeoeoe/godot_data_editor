@@ -469,12 +469,13 @@ func delete_class(item_class):
 	directory.remove(config_class_directory + "/" + item_class + ".png")
 
 func create_class(name, icon_path):
+	name = sanitize_string(name)
+
 	# Check if the classes folder already exists. If not, create it-
 	var directory = Directory.new()
 	if not directory.dir_exists(config_class_directory):
 		directory.make_dir(config_class_directory)
 	
-	name = sanitize_string(name)
 	if name == "":
 		emit_signal("class_insertion_failed", tr("Invalid name"), tr("The class name cannot be empty."))
 		return 
