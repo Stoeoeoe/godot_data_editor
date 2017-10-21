@@ -28,16 +28,16 @@ func load_item_value(item, property):
 	
 	
 func get_progress(item_class, id, property):
-	if items[item_class].has(id) and items[item_class][id].has(property):
+	var item_exists = items[item_class].has(id)
+	if  item_exists and property in items[item_class][id]:
 		return items[item_class][id][property]
 
 	
 func set_progress(item_class, id, property, value):
-	var item = item_manager.get_item(item_class, id)
-	var has_value = item.get(property)
-	if item and has_value:
+	var item = item_manager.get_item(item_class, id)	
+	if item and property in item:
 		item.set(property, value)
-		if has_user_signal("@any_value_changed"):
+		if has_user_signal("@any_value_changed "):
 			emit_signal("@any_value_changed", item, property, value)
 	
 		var signal_name = ""
@@ -131,8 +131,3 @@ func stop_observing_changes(observer):
 	
 func set_item_progress(item, property, value):
 	set_progress(item._class, item._id, property, value)
-	
-func get_progress_by_item(item):
-	
-
-	
