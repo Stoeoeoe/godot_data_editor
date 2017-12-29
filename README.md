@@ -98,12 +98,12 @@ Please feel free to contribute. Unfortunately, the code base still is not docume
 
 # Known Issues
 * The "Rename Class" feature may not properly rename the class file if it still in use
+* If you add the item as a child of another node and delete this parent later on, the item itself is also lost. I currently test a workaround where the item manager holds all items in a node hierarchy. 
 * In some cases, the controls are not correctly resized - pressing "Reload" should usually do the trick though
 * There is no support for undo/redo
 * Pressing Ctrl+S will not save the data items but the current scene
 * Originally, the _data_ singleton was stored automatically in the engine.cfg configuration as soon as the plugin was loaded. This has lead to various issues though. For that reason, _data_ must currently be added manually. 
 * Internationalization is still lacking
-* Under certain circumstances, integers cannot be entered
 * There is an issue with the color control whereby the default value indicated in the class is not being taken into account
 * No Godot 3 support yet ;)
 
