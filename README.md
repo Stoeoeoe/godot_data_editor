@@ -22,8 +22,9 @@ This repository hosts a plugin for the [Godot Engine]. It allows users to enter 
 * Copy the "addons" folder into your project folder
 * Open your project in the editor and navigate to the plugin (Scene -> Project Settings -> Plugins)
 * The plugin "godot_data_editor" should now appear, change the status from "Inactive" to "Active"
-* IMPORTANT: Add the _data_ singleton which allows you to access the data later on. To do so, go to the Project Settings -> AutoLoad, then enter "addons/godot_data_editor/data.gd" as path and "data" as Node Name. Save the singleton by clicking on "Add".
-![singleton]
+* *IMPORTANT*: Add the _data_ singleton which allows you to access the data later on. To do so, go to the Project Settings -> AutoLoad, then enter "addons/godot_data_editor/data.gd" as path and "data" as Node Name. Save the singleton by clicking on "Add":
+
+![singleton_screenshot]
 
 You can also download the addon in the Asset Lib, make sure to exclude the "demo" folder though :)
 
@@ -120,4 +121,4 @@ Stay calm, most issues can be resolved by either pressing the "Reload" button or
 [editor_screenshot]: https://github.com/Stoeoeoe/godot_data_editor/blob/master/screenshots/editor.png "The Godot Data Editor"
 [class_screenshot]: https://github.com/Stoeoeoe/godot_data_editor/blob/master/screenshots/class.png "Example Class"
 [data_access]: https://github.com/Stoeoeoe/godot_data_editor/blob/master/screenshots/data_access.png "Example Data Access"
-[singleton]: https://github.com/Stoeoeoe/godot_data_editor/blob/master/screenshots/singleton.png "Data Singleton"
+[singleton_screenshot]: https://github.com/Stoeoeoe/godot_data_editor/blob/master/screenshots/singleton.png "Data Singleton"
