@@ -1,3 +1,7 @@
+# IMPORTANT NOTE
+This plugin was written for Godot 2.1.4 and is not compatible with Godot 3.x. 
+Work on a port which will cover many features such as typing, proper handling of singleton etc. is in progress. Feel free to use the old version in your project.
+
 # Godot Data Editor
 This repository hosts a plugin for the [Godot Engine]. It allows users to enter data items based on Godot classes which are then serialized in either as json or binaries. Serialized items may be encrypted if desired.
 
